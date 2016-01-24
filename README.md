@@ -2,8 +2,12 @@
 Brandon Keyes - 100897196
 
 ## Classes
-* Main
-* Agent
-* Chef
-* Ingredient
-* Table
+* Main       - the main file, starts the agent and chef threads.
+* Agent      - handles the agent thread functionality
+* Chef       - handles the chef thread functionality
+* Ingredient - an enum class for different ingredients
+* Table      - a table to handle sandwich making stuff.
+
+## Setup
+1. Open the project in Eclipse.
+2. Run Main as Java Application. 
