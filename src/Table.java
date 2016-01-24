@@ -9,17 +9,19 @@ public class Table {
 	}
 	
 	// take an ingredient from the table
-	public synchronized
-	void get() {
-		
+	public ArrayList<Ingredient> get() {
+		ArrayList<Ingredient> list = new ArrayList<Ingredient>(ingredientList);
+		ingredientList.clear();
+		empty = true;
+		return list;
 	}
 	
 	// put an ingredient on the table
-	public synchronized
-	void put(Ingredient i) {
+	public void put(Ingredient i) {
 		ingredientList.add(i);
 		empty = false;
 	}
 	
+	public ArrayList<Ingredient> getIngredientList() { return ingredientList; }
 	public boolean isEmpty() { return empty; }
 }

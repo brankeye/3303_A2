@@ -11,19 +11,28 @@ public class Agent extends Thread {
 	
 	@Override
 	public void run() {
-		while(!table.isEmpty()) {
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		while(true) {
+			synchronized(table) {
+				while(!table.isEmpty()) {
+					try {
+						table.wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				placeIngredients();
+				table.notifyAll();
 			}
 		}
-		placeIngredients();
 	}
 	
 	public void placeIngredients() {
-		table.put(getRandomIngredient());
-		table.put(getRandomIngredient());
+		Ingredient itemOne = getRandomIngredient();
+		Ingredient itemTwo;
+		while((itemTwo = getRandomIngredient()) == itemOne);
+		table.put(itemOne);
+		table.put(itemTwo);
+		System.out.println(name + " has placed " + itemOne.toString() + " and " + itemTwo.toString() + " on the table.\n");
 	}
 	
 	public Ingredient getRandomIngredient() {

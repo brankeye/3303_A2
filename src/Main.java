@@ -7,9 +7,9 @@ public class Main {
 		
 		// instantiate the agent/chef threads
 		Agent agent = new Agent("Agent", table);
-		Chef  breadChef = new Chef("BreadChef", table, Ingredient.BREAD);
-		Chef  baconChef = new Chef("BaconChef", table, Ingredient.BACON);
-		Chef  bananaChef = new Chef("BananaChef", table, Ingredient.BANANA);
+		Chef  breadChef = new Chef("BreadChef", agent, table, Ingredient.BREAD);
+		Chef  baconChef = new Chef("BaconChef", agent, table, Ingredient.BACON);
+		Chef  bananaChef = new Chef("BananaChef", agent, table, Ingredient.BANANA);
 		
 		// start the threads
 		agent.start();
