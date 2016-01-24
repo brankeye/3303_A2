@@ -12,7 +12,7 @@ public class Agent extends Thread {
 	
 	@Override
 	public void run() {
-		while(numIngredientsGiven++ < 20) {
+		while(numIngredientsGiven < 20) {
 			synchronized(table) {
 				while(!table.isEmpty()) {
 					try {
@@ -28,16 +28,21 @@ public class Agent extends Thread {
 		System.out.println("The agent is done.\n");
 	}
 	
-	public void placeIngredients() {
+	// put the ingredients on the table
+	private void placeIngredients() {
 		Ingredient itemOne = getRandomIngredient();
 		Ingredient itemTwo;
+		
+		// make sure different ingredients are randomly chosen
 		while((itemTwo = getRandomIngredient()) == itemOne);
 		table.put(itemOne);
 		table.put(itemTwo);
+		numIngredientsGiven++;
 		System.out.println(name + " has placed " + itemOne.toString() + " and " + itemTwo.toString() + " on the table.\n");
 	}
 	
-	public Ingredient getRandomIngredient() {
+	// retrieve a random ingredient
+	private Ingredient getRandomIngredient() {
 		int index = (int)(Math.random() * Ingredient.values().length); 
 		return Ingredient.values()[index];
 	}

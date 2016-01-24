@@ -24,7 +24,8 @@ public class Chef extends Thread {
 					}
 					ArrayList<Ingredient> list = table.getIngredientList();
 					if(list.get(0) != infiniteIngredient && list.get(1) != infiniteIngredient) {
-						takeIngredients();
+						ingredientBag = table.get();
+						System.out.println(name + " has taken " + ingredientBag.get(0).toString() + " and " + ingredientBag.get(1).toString() + " from the table.");
 						table.notifyAll();
 						makeSandwich();
 					} else {
@@ -39,7 +40,8 @@ public class Chef extends Thread {
 		System.out.println("The chefs are done.\n");
 	}
 	
-	public void makeSandwich() {
+	// make a sandwich with all ingredients
+	private void makeSandwich() {
 		System.out.println(name + " made a sandwich with " + infiniteIngredient.toString() + ", " + 
 														     ingredientBag.get(0).toString() + ", and " +
 														     ingredientBag.get(1).toString() + ".");
@@ -52,10 +54,5 @@ public class Chef extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void takeIngredients() {
-		ingredientBag = table.get();
-		System.out.println(name + " has taken " + ingredientBag.get(0).toString() + " and " + ingredientBag.get(1).toString() + " from the table.");
 	}
 }
