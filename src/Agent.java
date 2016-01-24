@@ -3,6 +3,7 @@ public class Agent extends Thread {
 	
 	private String name;
 	private Table  table;
+	private static int numIngredientsGiven = 0;
 	
 	public Agent(String name_t, Table table_t) {
 		name  = name_t;
@@ -11,7 +12,7 @@ public class Agent extends Thread {
 	
 	@Override
 	public void run() {
-		while(true) {
+		while(numIngredientsGiven++ < 20) {
 			synchronized(table) {
 				while(!table.isEmpty()) {
 					try {
@@ -24,6 +25,7 @@ public class Agent extends Thread {
 				table.notifyAll();
 			}
 		}
+		System.out.println("The agent is done.\n");
 	}
 	
 	public void placeIngredients() {
